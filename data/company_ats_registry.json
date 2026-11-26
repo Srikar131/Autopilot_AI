@@ -1,0 +1,23 @@
+{
+  "custom_added": {
+    "greenhouse": [],
+    "lever": [],
+    "ashby": [],
+    "smartrecruiters": []
+  },
+  "auto_discovered": {
+    "greenhouse": [],
+    "lever": [
+      "pditechnologies"
+    ],
+    "ashby": [
+      "siftstack"
+    ],
+    "smartrecruiters": [
+      "boschgroup",
+      "crux1",
+      "experian",
+      "westerndigital"
+    ]
+  }
+}

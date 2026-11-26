@@ -1,0 +1,460 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light dark;
+
+  --surface-bg-light: #f4f6fb;
+  --surface-bg-dark: #0b1120;
+  --surface-card-light: #ffffff;
+  --surface-card-dark: #111a2e;
+  --surface-muted-light: #e9eef7;
+  --surface-muted-dark: #1a2640;
+  --border-subtle-light: #d6deec;
+  --border-subtle-dark: #253453;
+  --text-primary-light: #0f172a;
+  --text-primary-dark: #f1f5f9;
+  --text-secondary-light: #475569;
+  --text-secondary-dark: #94a3b8;
+  --brand-accent-light: #2563eb;
+  --brand-accent-dark: #38bdf8;
+  --scrollbar-thumb-light: #94a3b8;
+  --scrollbar-thumb-dark: #475569;
+  --scrollbar-track-light: #e2e8f0;
+  --scrollbar-track-dark: #0f172a;
+
+  --surface-bg: var(--surface-bg-light);
+  --surface-card: var(--surface-card-light);
+  --surface-muted: var(--surface-muted-light);
+  --border-subtle: var(--border-subtle-light);
+  --text-primary: var(--text-primary-light);
+  --text-secondary: var(--text-secondary-light);
+  --brand-accent: var(--brand-accent-light);
+  --scrollbar-thumb: var(--scrollbar-thumb-light);
+  --scrollbar-track: var(--scrollbar-track-light);
+
+  @media (prefers-color-scheme: dark) {
+    --surface-bg: var(--surface-bg-dark);
+    --surface-card: var(--surface-card-dark);
+    --surface-muted: var(--surface-muted-dark);
+    --border-subtle: var(--border-subtle-dark);
+    --text-primary: var(--text-primary-dark);
+    --text-secondary: var(--text-secondary-dark);
+    --brand-accent: var(--brand-accent-dark);
+    --scrollbar-thumb: var(--scrollbar-thumb-dark);
+    --scrollbar-track: var(--scrollbar-track-dark);
+  }
+
+  @supports (color: light-dark(white, black)) {
+    --surface-bg: light-dark(var(--surface-bg-light), var(--surface-bg-dark));
+    --surface-card: light-dark(var(--surface-card-light), var(--surface-card-dark));
+    --surface-muted: light-dark(var(--surface-muted-light), var(--surface-muted-dark));
+    --border-subtle: light-dark(var(--border-subtle-light), var(--border-subtle-dark));
+    --text-primary: light-dark(var(--text-primary-light), var(--text-primary-dark));
+    --text-secondary: light-dark(var(--text-secondary-light), var(--text-secondary-dark));
+    --brand-accent: light-dark(var(--brand-accent-light), var(--brand-accent-dark));
+    --scrollbar-thumb: light-dark(var(--scrollbar-thumb-light), var(--scrollbar-thumb-dark));
+    --scrollbar-track: light-dark(var(--scrollbar-track-light), var(--scrollbar-track-dark));
+  }
+
+  &:has(> head > meta[name="color-scheme"][content="dark"]) {
+    color-scheme: dark;
+    --surface-bg: var(--surface-bg-dark);
+    --surface-card: var(--surface-card-dark);
+    --surface-muted: var(--surface-muted-dark);
+    --border-subtle: var(--border-subtle-dark);
+    --text-primary: var(--text-primary-dark);
+    --text-secondary: var(--text-secondary-dark);
+    --brand-accent: var(--brand-accent-dark);
+    --scrollbar-thumb: var(--scrollbar-thumb-dark);
+    --scrollbar-track: var(--scrollbar-track-dark);
+  }
+  &:has(> head > meta[name="color-scheme"][content="light"]) {
+    color-scheme: light;
+    --surface-bg: var(--surface-bg-light);
+    --surface-card: var(--surface-card-light);
+    --surface-muted: var(--surface-muted-light);
+    --border-subtle: var(--border-subtle-light);
+    --text-primary: var(--text-primary-light);
+    --text-secondary: var(--text-secondary-light);
+    --brand-accent: var(--brand-accent-light);
+    --scrollbar-thumb: var(--scrollbar-thumb-light);
+    --scrollbar-track: var(--scrollbar-track-light);
+  }
+
+  accent-color: var(--brand-accent);
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+@supports not (scrollbar-color: auto) {
+  .app-scroll,
+  .table-wrapper {
+    scrollbar-width: auto;
+  }
+  .app-scroll::-webkit-scrollbar,
+  .table-wrapper::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  .app-scroll::-webkit-scrollbar-thumb,
+  .table-wrapper::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 9999px;
+  }
+  .app-scroll::-webkit-scrollbar-track,
+  .table-wrapper::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+  }
+}
+
+body {
+  margin: 0;
+  background-color: var(--surface-bg);
+  color: var(--text-primary);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.card-surface {
+  background-color: var(--surface-card);
+  border: 1px solid var(--border-subtle);
+}
+
+.muted-surface {
+  background-color: var(--surface-muted);
+  border: 1px solid var(--border-subtle);
+}
+
+.text-muted {
+  color: var(--text-secondary);
+}
+
+/* Native <dialog> modal scroll containment & backdrop */
+dialog.app-dialog {
+  margin: auto;
+  padding: 0;
+  border: 1px solid var(--border-subtle);
+  border-radius: 1rem;
+  background-color: var(--surface-card);
+  color: var(--text-primary);
+  max-width: min(94vw, 960px);
+  width: 100%;
+  max-height: 90dvh;
+  box-shadow: 0 24px 64px rgba(2, 6, 23, 0.45);
+}
+
+dialog.app-dialog[open] {
+  display: flex;
+  flex-direction: column;
+}
+
+dialog.app-dialog:modal {
+  overscroll-behavior: contain;
+}
+
+dialog.app-dialog::backdrop {
+  background-color: rgba(2, 6, 23, 0.65);
+  backdrop-filter: blur(4px);
+  overflow: hidden;
+  overscroll-behavior: contain;
+}
+
+/* Responsive semantic data table */
+.table-wrapper {
+  overflow: auto;
+  max-inline-size: 100%;
+  max-block-size: min(620px, 72vh);
+  container-type: inline-size;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border-subtle);
+  background-color: var(--surface-card);
+}
+
+.table-wrapper:focus-visible,
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--brand-accent);
+  outline-offset: 2px;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  text-align: left;
+  font-size: 0.875rem;
+}
+
+.data-table thead th {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 2;
+  background-color: var(--surface-muted);
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-subtle);
+  white-space: nowrap;
+}
+
+.data-table tbody th {
+  position: sticky;
+  inset-inline-start: 0;
+  z-index: 1;
+  background-color: var(--surface-card);
+  font-weight: 600;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.data-table tbody td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--border-subtle);
+  vertical-align: middle;
+}
+
+@container (width < 680px) {
+  .responsive-jobs-table,
+  .responsive-jobs-table thead,
+  .responsive-jobs-table tbody,
+  .responsive-jobs-table tr,
+  .responsive-jobs-table th,
+  .responsive-jobs-table td {
+    display: block;
+  }
+
+  .responsive-jobs-table thead {
+    display: none;
+  }
+
+  .responsive-jobs-table tr {
+    margin-block-end: 0.85rem;
+    border: 1px solid var(--border-subtle);
+    border-radius: 0.75rem;
+    overflow: hidden;
+  }
+
+  .responsive-jobs-table tbody th {
+    position: sticky;
+    inset-block-start: 0;
+    z-index: 2;
+    background-color: var(--surface-muted);
+  }
+
+  .responsive-jobs-table {
+    --label-2: "Role & Location";
+    --label-3: "Portal";
+    --label-4: "Match Score";
+    --label-5: "Status";
+    --label-6: "Actions";
+  }
+
+  .responsive-jobs-table td:nth-child(2)::before { content: var(--label-2) ": "; font-weight: 600; color: var(--text-secondary); }
+  .responsive-jobs-table td:nth-child(3)::before { content: var(--label-3) ": "; font-weight: 600; color: var(--text-secondary); }
+  .responsive-jobs-table td:nth-child(4)::before { content: var(--label-4) ": "; font-weight: 600; color: var(--text-secondary); }
+  .responsive-jobs-table td:nth-child(5)::before { content: var(--label-5) ": "; font-weight: 600; color: var(--text-secondary); }
+  .responsive-jobs-table td:nth-child(6)::before { content: var(--label-6) ": "; font-weight: 600; color: var(--text-secondary); }
+}
+
+/* Validation only after user interaction */
+.field-input {
+  background-color: var(--surface-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.625rem;
+  padding: 0.6rem 0.8rem;
+  font: inherit;
+  font-size: max(0.925rem, 1em);
+  min-height: 44px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.field-input:is(:user-invalid, .user-invalid-fallback) {
+  border-color: #ef4444;
+  background-color: rgba(239, 68, 68, 0.08);
+}
+
+.field-error-msg {
+  display: none;
+  color: #ef4444;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+}
+
+.field-input:is(:user-invalid, .user-invalid-fallback) + .field-error-msg {
+  display: block;
+}
+
+.visually-hidden:where(:not(:focus-within, :active)) {
+  position: absolute !important;
+  clip-path: inset(50%) !important;
+  overflow: hidden !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  white-space: nowrap !important;
+}
+
+/* Native <progress> discovery status bar (separate vendor pseudo-element rules) */
+progress.discovery-progress {
+  appearance: none;
+  border: 0 solid;
+  overflow: clip;
+  container-type: inline-size;
+  --progress-bar-radius: 1e5px;
+  --progress-bar-indeterminate-size: 30%;
+  --progress-bar-indeterminate-animation-duration: 1.5s;
+  border-radius: var(--progress-bar-radius);
+  background: var(--surface-muted);
+  box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  progress.discovery-progress {
+    --progress-bar-indeterminate-animation-duration: 10s;
+  }
+}
+
+progress.discovery-progress:dir(rtl) {
+  --progress-bar-indeterminate-animation: progress-bar-indeterminate
+    var(--progress-bar-indeterminate-animation-duration) infinite linear reverse;
+}
+
+progress.discovery-progress:indeterminate {
+  --progress-bar-animation: var(
+    --progress-bar-indeterminate-animation,
+    progress-bar-indeterminate var(--progress-bar-indeterminate-animation-duration) infinite linear
+  );
+}
+
+progress.discovery-progress::-webkit-progress-bar {
+  background: transparent;
+}
+
+progress.discovery-progress::-webkit-progress-value {
+  background: var(--brand-accent);
+  border-radius: var(--progress-bar-radius);
+  transition: inline-size 0.3s;
+  animation: var(--progress-bar-animation, revert-rule);
+}
+
+progress.discovery-progress::-moz-progress-bar {
+  background: var(--brand-accent);
+  border-radius: var(--progress-bar-radius);
+  transition: inline-size 0.3s;
+  animation: var(--progress-bar-animation, revert-rule);
+}
+
+@keyframes progress-bar-indeterminate {
+  from,
+  to {
+    inline-size: var(--progress-bar-indeterminate-size);
+    margin-right: auto;
+  }
+  from {
+    translate: -100%;
+  }
+  to {
+    translate: 100cqi;
+  }
+}
+
+/* Dribbble-inspired selectable job card (fixed 2px border prevents layout shift) */
+.job-card {
+  container-type: inline-size;
+  border: 2px solid var(--border-subtle);
+  border-radius: 1rem;
+  background-color: var(--surface-card);
+  box-shadow: 0 1px 3px rgb(15 23 42 / 0.04);
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.job-card:hover {
+  border-color: color-mix(in srgb, var(--brand-accent) 45%, var(--border-subtle));
+}
+
+.job-card:has(input[type="checkbox"]:checked) {
+  border-color: var(--brand-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand-accent) 16%, transparent);
+}
+
+.job-card-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.65rem;
+}
+
+@container (width < 360px) {
+  .job-card-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+@supports not (accent-color: auto) {
+  label.brand-check-wrap {
+    position: relative;
+    padding-left: 1.75rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  label.brand-check-wrap input[type="checkbox"].brand-check {
+    position: absolute !important;
+    clip-path: inset(50%) !important;
+    overflow: hidden !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: -1px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    white-space: nowrap !important;
+  }
+
+  label.brand-check-wrap input[type="checkbox"].brand-check + span::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1.1rem;
+    height: 1.1rem;
+    border: 2px solid var(--border-subtle);
+    background: var(--surface-card);
+    border-radius: 0.3rem;
+    box-sizing: border-box;
+  }
+
+  label.brand-check-wrap input[type="checkbox"].brand-check:focus-visible + span::before {
+    outline: 2px solid var(--brand-accent);
+    outline-offset: 2px;
+  }
+
+  label.brand-check-wrap input[type="checkbox"].brand-check:checked + span::before {
+    background-color: var(--brand-accent);
+    border-color: var(--brand-accent);
+  }
+
+  label.brand-check-wrap input[type="checkbox"].brand-check:checked + span::after {
+    content: "✓";
+    position: absolute;
+    left: 0.22rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.8rem;
+  }
+}

@@ -1,0 +1,47 @@
+[project]
+name = "autoapply-ai"
+version = "1.0.0"
+description = "Stealth AI Job Application Autopilot with LangGraph HITL & Dynamic LaTeX Tailoring"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.32.0",
+    "pydantic>=2.9.2",
+    "pydantic-settings>=2.6.0",
+    "supabase>=2.10.0",
+    "google-genai>=0.3.0",
+    "langgraph>=0.2.45",
+    "langgraph-checkpoint-postgres>=2.0.2",
+    "browser-use>=0.1.40",
+    "camoufox[geoip]>=0.4.6",
+    "patchright>=1.48.0",
+    "aiogram>=3.14.0",
+    "apscheduler>=3.10.4",
+    "python-jobspy>=1.1.75",
+    "jinja2>=3.1.4",
+    "pillow>=11.0.0",
+    "numpy>=2.1.2",
+    "redis>=5.2.0",
+    "httpx>=0.27.2",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3.3",
+    "pytest-asyncio>=0.24.0",
+    "ruff>=0.7.2",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+
+[tool.ruff]
+line-length = 110
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+ignore = ["E501"]

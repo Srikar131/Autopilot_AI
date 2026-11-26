@@ -1,0 +1,44 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\pagenumbering{gobble}
+\setlist[itemize]{noitemsep, topsep=2pt, leftmargin=1.2em}
+
+\begin{document}
+\begin{center}
+    {\LARGE \textbf{\VAR{candidate.name}}} \\
+    \vspace{2pt}
+    \VAR{candidate.location} \textbar{} \href{mailto:\VAR{candidate.email}}{\VAR{candidate.email}} \textbar{} \VAR{candidate.phone}
+\end{center}
+
+\vspace{-8pt}
+\section*{Summary}
+\VAR{tailored_summary}
+
+\vspace{-6pt}
+\section*{Technical Skills}
+\begin{itemize}
+\BLOCK{for category, skills_list in skills.items()}
+    \item \textbf{\VAR{category}:} \VAR{skills_list}
+\BLOCK{endfor}
+\end{itemize}
+
+\vspace{-6pt}
+\section*{Selected AI \& Engineering Projects}
+\BLOCK{for proj in selected_projects}
+\textbf{\VAR{proj.title}} \hfill \textit{\VAR{proj.tech_stack}}
+\begin{itemize}
+\BLOCK{for bullet in proj.bullets}
+    \item \VAR{bullet}
+\BLOCK{endfor}
+\end{itemize}
+\vspace{4pt}
+\BLOCK{endfor}
+
+\vspace{-6pt}
+\section*{Education}
+\textbf{\VAR{education.degree}} — \VAR{education.institution} \hfill \VAR{education.graduation_year}
+
+\end{document}
